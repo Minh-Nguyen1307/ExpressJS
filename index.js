@@ -6,6 +6,7 @@ app.use(express.json());
 
 import { customers, orders, products } from "./dat.js";
 
+
 app.get("/customers", (req, res) => {
   res.send(customers);
 });
@@ -149,6 +150,17 @@ app.delete("/customers/:id", (req, res) => {
   customers.splice(customerIndex, 1);
 
   res.status(200).send({ message: "Customer deleted successfully." });
+});
+
+app.get('/users', (req, res) => {
+  fetch('http://localhost:3000/users').then((rs) => {
+      return rs.json()
+  }).then((data) => {
+      res.send({
+          message: 'Hello MindX-er',
+          data
+      });
+  });
 });
 app.listen(8080, () => {
   console.log("Server is running!");
